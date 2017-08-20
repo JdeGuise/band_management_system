@@ -1,0 +1,390 @@
+Concert / Marching Band Inventory System
+
+Goal : The goal of this project is to build a comprehensive dbms for a high school band program, with all inventory management considerations taken into effect.  
+
+Bands can take different forms, such as marching band, pep band, jazz band, concert band, etc.  The system will act as the basis for creation of each of these bands, as instantiated objects containing all necessary properties (ie a band database system with subsystems for each band)
+
+
+
+
+Tables
+
+	PEOPLE
+		Teacher
+		Student
+		Parent
+		Administrator
+		Booster
+		Band Faculty
+
+	ASSETS
+		instruments
+			school owned
+			student owned
+
+		percussion
+			unique equipment
+
+		school equipment
+
+			garbage cans
+			music podiums
+			chairs
+			instrument lockers
+			valve oil
+
+		INSTRUMENTS
+			@purchase_price : float price purchased
+			@upkeep_needs : nonoptional text for upkeep considerations
+			@known_issues : nonoptional text for upkeep considerations
+			@instrument_id : int unique instrument id
+			@instrument_key : varchar(3) specifier for instrument key
+			@can_be_marched : denotes whether or not it's for marching band
+			@is_marching_instrument : bool denoting marching band use
+
+				TYPES (instrument_type)
+					@type_id : int type_id denoting subtable type_id
+					@type_name : text 
+
+					CLARINET
+						clarinet_type_id : int id
+							0 ALTO CLARINET
+							1 Bb CLARINET
+							2 C CLARINET
+							3 BASS CLARINET
+
+					SAXOPHONE
+						saxophone_type_id : int id
+							0 Bb SOPRILLO SAXOPHONE
+							1 Eb SOPRANINO SAXOPHONE
+							2 Bb SOPRANO SAXOPHONE
+							3 Eb ALTO SAXOPHONE
+							4 Bb TENOR SAXOPHONE
+							5 C TENOR SAXOPHONE
+							6 Eb BARITONE SAXOPHONE
+							7 Bb BASS SAXOPHONE
+							8 Eb CONTRABASS SAXOPHONE
+							9 Bb SUBCONTRABASS SAXOPHONE
+
+					TRUMPET
+						trumpet_type_id : int id
+							0 C TRUMPET
+							1 Bb TRUMPET
+
+					TROMBONE
+						trombone_type_id : int id
+							0 C TROMBONE
+							1 C TROMBUMPET
+							2 C VALVED TROMBONE
+
+					SNARE_DRUM
+						snare_type_id : int id
+							0 CONCERT
+							1 KIT
+							2 MARCHING
+
+					BASS_DRUM
+						bass_type_id : int id
+							0 CONCERT
+							1 KIT
+							2 MARCHING
+
+					PIANO
+						piano_type_id : int id
+							0 CONCERT
+							1 GRAND
+							2 BABY GRAND
+							3 UPRIGHT
+							4 ELECTRONIC KEYBOARD / OTHER
+
+		SCHOOL_INSTRUMENTS
+
+			@is_concert_instrument : bool denoting status
+			@is_jazzband_instrument
+			@is_drumkit_snare,bass,tom
+
+			WOODWINDS
+
+				FLUTE
+					@flute_id : int id
+					@instrument_type : optional field denoting flute type if nonstandard concert flute
+				
+				PICCOLO
+					@piccolo_id : int unique piccolo id
+
+				CLARINET
+					@clarinet_id : int unique clarinet id
+					@instrument_type : @clarinet_instrument_type_id
+
+				OBOE
+					@oboe_id : int unique oboe id
+
+				BASSOON
+					@bassoon_id : int unique bassoon id
+
+				SAXOPHONE
+					@saxophone_id : int unique saxophone id
+					@saxophone_type : @saxophone_instrument_type_id
+
+			BRASS
+				TRUMPET
+					@trumpet_id : int unique trumpet id
+					@trumpet_type : @trumpet_instrument_type_id
+
+				TROMBONE
+					@trombone_id : int unique trombone id
+					@trombone_type : @trombone_instrument_type_id
+
+				FLUGELHORN
+					@flugelhorn_id : int unique flugelhorn id
+
+				FRENCH_HORN
+					@french_horn_id : int unique french horn id
+
+				MELLOPHONE
+					@mellophone_id : int unique mellophone id
+					@can_be_marched : bool on instrument ability and condition
+					@is_marching_instrument : bool denoting this year's horns
+
+				BARITONE
+					@baritone_id
+					@can_be_marched
+					@is_marching_instrument
+					@euphonium_type : @euphonium_instrument_type_id
+
+				EUPHONIUM
+					@euphonium_id
+					@can_be_marched
+					@is_marching_instrument
+					@euphonium_type : @euphonium_instrument_type_id
+
+				TUBA
+					@tuba_id
+					@can_be_marched
+					@is_marching_instrument
+					@tuba_type : @tuba_instrument_type_id
+
+				SOUSAPHONE
+					@sousaphone_id
+					@can_be_marched
+					@is_marching_instrument
+					@tuba_type : @tuba_instrument_type_id
+
+			PERCUSSION
+				SNARE_DRUM
+					@snare_id
+					@snare_type
+					@can_be_marched
+					@is_marching_instrument
+					@is_drumkit_snare
+
+				BASS_DRUM
+					@bass_drum_id
+					@bass_type
+					@can_be_marched
+					@is_marching_instrument
+					@is_drumkit_bass
+
+				TENOR_DRUMS
+					@tenor_drum_id
+					@is_marching_instrument
+					@can_be_marched
+
+				MARIMBA
+					@marimba_id
+					@is_marching_instrument
+
+				TIMPANI
+					@timpani_id
+					@is_marching_instrument
+
+				XYLOPHONE
+					@xylophone_id
+					@is_marching_instrument
+
+				VIBROPHONE
+					@vibrophone_id
+					@is_marching_instrument
+					@is_jazz_instrument
+
+				MISC PERCUSSION
+
+					TRIANGLE
+						@triangle_id
+		
+					EGG_SHAKER
+						@egg_shaker_id
+
+					WOOD_BLOCK
+						@woodblock_id
+
+					GOCK_BLOCK
+						@gockblock_id
+					
+					WIND_CHIMES
+						@windchimes_id
+
+				TOM_DRUM
+					@tom_id
+					@is_drumkit_tom
+
+				GONG
+					@gong_id
+					@is_marching_instrument
+					@is_jazzband_instrument
+				
+				SPLASH_CYMBAL
+					@splash_cymbal_id
+					@is_drumkit_instrumnet
+
+				RIDE_CYMBAL
+					@ride_cymbal_id
+					@is_drumkit_instrument
+					@is_concert_instrument
+
+
+				CHINESE_HIGHHAT_CYMBAL
+					@chinese_highhat_id
+
+				CRASH_CYMBAL
+					@crash_cymbal_id
+				
+				SYMPHONIC_CHIMES
+					@symphonic_chime_id
+
+				MARIMBA
+					@marimba_id
+					@is_marching_instrument
+
+				VIBROPHONE
+					@vibrophone_id
+					@is_marching_instrument
+					@is_concert_instrument
+					@is_jazzband_instrument
+
+				MALLETS
+					...
+
+			STRINGS
+				STRING_BASS
+					@stringbass_id
+					@is_jazzband_instrument
+					@is_concert_instrument
+
+				BASS_GUITAR
+					@bassguitar_id
+					@is_jazzband_instrument
+					@is_concert_instrument
+
+				PIANO
+					@piano_id
+					@piano_type
+					@is_jazzband_instrument
+					@is_concert_instrument
+
+
+	COLORGUARD
+
+		FLAGS
+			@flag_id
+			@flag_type : text designator for type - main, movement, etc.
+
+		RIFLES
+			@rifle_id
+
+		SABRES
+			@sabre_id
+
+		UNIFORMS
+			@uniform_id
+			@uniform_size
+
+	PERSON
+		@first_name : string first name
+		@last_name : string last name
+		@relationship : int relationship_id
+	
+		STUDENT
+			@ PERSON fields
+			@owns_instrument : bool
+			@role : band roles id
+
+		TEACHER
+			@ PERSON fields
+			@pay_rate : float salaried compensation
+
+		PARENT
+			@ PERSON fields
+			@child_ids : if 1 child, int student_id
+
+		ADMINISTRATOR
+			@ PERSON fields
+			@administrator_id : school administrators (superintendent, principal, etc.)
+
+
+		BOOSTER
+			@ PERSON fields
+			@booster_id
+			@is_board_member
+			@position_id (optional)
+
+		BAND FACULTY
+			@ PERSON fields
+			@faculty_id : int faculty id (band assistants, lessons instructors, etc.)
+			@pay_rate : float salaried compensation
+			@section_id : int music section id
+
+
+	ROLE (ASSOCIATION)
+		0 COLORGUARD
+		1 DRUM MAJOR
+		2 DIRECTOR
+		3 WOODWIND
+		4 BRASS
+		5 PERCUSSIONIST
+		6 PIT
+		7 BATTERY
+		8 JAZZ BAND
+		9 CONCERT BAND
+		10 CHAMBER ENSEMBLE
+		11 MISC
+
+
+	MARCHING UNIFORMS
+		MARCHING HELMET / SHAKO / etc
+		BIBBERS
+		MARCHING JACKETS
+		MARCHING SHOES
+		MARCHING GLOVES
+		DRUM MAJOR UNIFORMS
+		PLUMES
+		GAUNTLETS
+
+	CONCERT UNIFORMS
+		GIRLS
+			SYMPHONIC BAND
+				DRESS
+			WIND ENSEMBLE
+				DRESS
+
+		BOYS
+			TUXEDO
+				JACKET
+				PANTS
+
+
+Relationship
+@relationship_id : int relationship id
+@relationship_desc : text description
+
+0 Teacher
+1 Parent
+2 Student
+3 Band Faculty
+4 School Administrator
+
+
+generic table
+first name
+last name
+relationship
