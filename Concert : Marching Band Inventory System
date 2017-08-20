@@ -1,0 +1,160 @@
+Concert / Marching Band Inventory System
+
+Goal : The goal of this project is to build a comprehensive dbms for a high school band program, with all inventory management considerations taken into effect.  
+
+Bands can take different forms, such as marching band, pep band, jazz band, concert band, etc.  The system will act as the basis for creation of each of these bands, as instantiated objects containing all necessary properties (ie a band database system with subsystems for each band)
+
+
+
+
+Tables
+
+	PEOPLE
+		Teacher
+		Student
+		Parent
+		Administrator
+		Booster
+		Band Faculty
+
+	ASSETS
+		instruments
+			school owned
+			student owned
+
+		percussion
+			unique equipment
+
+		school equipment
+
+			garbage cans
+			music podiums
+			chairs
+			instrument lockers
+			valve oil
+
+		INSTRUMENTS
+			@purchase_price : float price purchased
+			@upkeep_needs : nonoptional text for upkeep considerations
+			@known_issues : nonoptional text for upkeep considerations
+			@instrument_id : int unique instrument id
+			@instrument_key : varchar(3) specifier for instrument key
+			@can_be_marched : denotes whether or not it's for marching band
+			@is_marching_instrument : bool denoting marching band use
+
+			WOODWINDS
+
+				TYPES
+					@type_id : int type_id denoting subtable type_id
+					@type_name : text 
+
+					CLARINET
+					SAXOPHONE
+					TRUMPET
+					TROMBONE
+					SNARE_DRUM
+					BASS_DRUM
+					TENOR_DRUM
+
+				FLUTE
+					@flute_id
+					@flute_type : optional field denoting flute type if nonstandard concert flute
+				
+				PICCOLO
+					@piccolo_id
+
+				CLARINET
+					@clarinet_id
+					@clarinet_type
+
+				OBOE
+					@oboe_id
+
+				BASSOON
+					@bassoon_id
+
+				SAXOPHONE
+					@saxophone_id
+					@saxophone_type : @saxophone_id
+
+			BRASS
+				TRUMPET
+				TROMBONE
+				FLUGELHORN
+				FRENCH_HORN
+				MELLOPHONE
+				BARITONE
+				EUPHONIUM
+				TUBA
+				SOUSAPHONE
+
+			PERCUSSION
+				DRUM_KIT
+				MARIMBA
+				VIBROPHONE
+
+			STRINGS
+				STRING_BASS
+				BASS_GUITAR
+				PIANO
+
+	COLORGUARD
+
+		FLAGS
+		RIFLES
+		SABRES
+		UNIFORMS
+
+	PERSON
+		@first_name : string first name
+		@last_name : string last name
+		@relationship : int relationship_id
+	
+		STUDENT
+			@ PERSON fields
+			@owns_instrument : bool
+
+		TEACHER
+			@ PERSON fields
+			@pay_rate : float salaried compensation
+
+		PARENT
+			@ PERSON fields
+			@child_ids : if 1 child, int student_id
+
+		ADMINISTRATOR
+			@ PERSON fields
+			@administrator_id : school administrators (superintendent, principal, etc.)
+
+
+		BOOSTER
+			@ PERSON fields
+			@booster_id
+			@is_board_member
+			@position_id (optional)
+
+		BAND FACULTY
+			@ PERSON fields
+			@faculty_id : int faculty id (band assistants, lessons instructors, etc.)
+			@pay_rate : float salaried compensation
+			@section_id : int music section id
+
+
+
+
+
+Relationship
+@relationship_id : int relationship id
+@relationship_desc : text description
+
+0 Teacher
+1 Parent
+2 Student
+3 Band Faculty
+4 School Administrator
+
+
+generic table
+first name
+last name
+relationship
